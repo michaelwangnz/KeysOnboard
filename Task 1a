@@ -1,0 +1,5 @@
+SELECT Name,PropertyId, OwnerId
+FROM OwnerProperty 
+INNER JOIN Property ON OwnerProperty.Id = Property.Id
+WHERE OwnerId = 1426 
+
