@@ -1,6 +1,5 @@
-SELECT p.Name,p.Id,phv.Value
+SELECT p.Name,p.Id,pf.CurrentHomeValue
 FROM OwnerProperty op
-INNER JOIN Property p ON op.PropertyId = p.Id
-INNER JOIN PropertyHomeValue phv ON p.Id = phv.PropertyId
+INNER JOIN Property p ON p.Id = op.Id 
+INNER JOIN PropertyFinance pf ON p.Id = pf.Id
 WHERE OwnerId = 1426 
-AND phv.isactive = 1
