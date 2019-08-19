@@ -1,0 +1,22 @@
+== 1c i ==
+
+SELECT (NoOfWeeks * RentalPaymentPerWeek) AS TotalAmount 
+FROM(
+SELECT P.Name AS PropertyName, DATEDIFF(Week, TP.StartDate, TP.EndDate) AS NoOfWeeks,
+CASE 
+   WHEN TPF.Id = 2 THEN TP.PaymentAmount * 0.5
+   WHEN TPF.Id = 3 THEN TP.PaymentAmount * 0.25
+   ELSE TP.PaymentAmount 
+   END AS RentalPaymentPerWeek
+FROM OwnerProperty OP 
+INNER JOIN Property P ON OP.PropertyId = P.Id 
+INNER JOIN TenantProperty TP ON TP.PropertyId = P.Id
+INNER JOIN TenantPaymentFrequencies TPF ON TPF.Id = TP.PaymentFrequencyId
+WHERE OP.OwnerId = 1426) AS Sub
+
+
+== 1c ii ==
+
+SELECT Yield 
+FROM PropertyFinance pf, OwnerProperty op
+WHERE pf.PropertyId = op.PropertyId AND op.OwnerId = 1426
